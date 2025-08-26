@@ -1,0 +1,24 @@
+# Ignorar ambiente virtual do Python
+venv/
+.venv/
+
+# Ignorar caches e arquivos de build do Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Ignorar arquivos de configuração de IDEs
+.vscode/
+.idea/
+
+# Ignorar arquivos de dados ou modelos grandes (adicione os seus aqui)
+*.csv
+*.pkl
+*.model
+*.sqlite3
+data/
+models/
+
+# Ignorar dependências do Node.js (caso existam)
+node_modules/
