@@ -13,7 +13,7 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from ultralytics import YOLO
-import torch
+
 
 app = Flask(__name__)
 
@@ -109,8 +109,13 @@ def predict():
         # ======== Predição YOLO =========
         img_resized = img.resize(IMG_SIZE)
         yolo_result = yolo_model(img_resized, imgsz=224, verbose=False)[0]
-        yolo_class = int(torch.argmax(yolo_result.probs.data).item())
-        yolo_confidence = float(torch.max(yolo_result.probs.data).item())
+
+        # Converte o tensor do PyTorch para um array NumPy
+        probs_np = yolo_result.probs.data.cpu().numpy()
+
+        # Usa as funções do NumPy para obter classe e confiança
+        yolo_class = int(np.argmax(probs_np))
+        yolo_confidence = float(np.max(probs_np))
 
         # Resposta de sucesso (JSON)
         return jsonify({

@@ -3,7 +3,6 @@ gunicorn
 numpy
 pillow
 tensorflow
-torch
 ultralytics
 scikit-learn
 python-dotenv
