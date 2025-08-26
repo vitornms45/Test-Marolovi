@@ -1,0 +1,394 @@
+.main-content {
+    padding: 2rem;
+    background-color: #f8fafc;
+    min-height: 100vh;
+}
+
+.medical-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: #2c3e50;
+}
+
+.medical-header h1 {
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.medical-header .lead {
+    color: #7f8c8d;
+    font-weight: 300;
+}
+
+.upload-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
+    border-top: 4px solid #3498db;
+    overflow: hidden;
+}
+
+.upload-card-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.upload-card-header h2 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-card-header p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.medical-drop-zone {
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.medical-drop-zone:hover {
+    background-color: #f8fafc;
+}
+
+.drop-zone-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.drop-zone-content i {
+    font-size: 3.5rem;
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.drop-zone-content h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.drop-zone-content p {
+    color: #7f8c8d;
+}
+
+#medicalFileInput {
+    display: none;
+}
+
+.upload-card-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #ecf0f1;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+/* Estilos para a área de resultados */
+.results-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.results-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.results-header h2 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.confidence-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+}
+
+.confidence-bar {
+    width: 150px;
+    height: 8px;
+    background: #ecf0f1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.confidence-level {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #e74c3c, #f39c12, #2ecc71);
+    transition: width 0.5s ease;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.medical-image-viewer {
+    border: 1px solid #ecf0f1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.viewer-toolbar {
+    padding: 0.8rem;
+    background: #f8fafc;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    gap: 0.8rem;
+}
+
+.tool-btn {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #7f8c8d;
+    transition: all 0.2s;
+}
+
+.tool-btn:hover {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.image-container {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+#medicalPreview {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+}
+
+#annotationCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.diagnosis-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.diagnosis-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.diagnosis-card h3 {
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+    border-bottom: 1px solid #ecf0f1;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.findings-list, .recommendations {
+    padding: 1.5rem;
+    min-height: 150px;
+}
+
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #bdc3c7;
+    text-align: center;
+}
+
+.no-results i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.diagnosis-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+/* Botões médicos estilizados */
+.btn-medical-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+}
+
+.btn-medical-primary:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-medical-secondary {
+    background: white;
+    color: #7f8c8d;
+    border: 1px solid #ddd;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-medical-secondary:hover {
+    background: #f8fafc;
+    border-color: #ccc;
+}
+
+.btn-medical-report, .btn-medical-share {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-medical-report {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    box-shadow: 0 2px 10px rgba(231, 76, 60, 0.3);
+}
+
+.btn-medical-report:hover {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+.btn-medical-share {
+    background: white;
+    color: #7f8c8d;
+    border: 1px solid #ddd;
+}
+
+.btn-medical-share:hover {
+    background: #f8fafc;
+    border-color: #ccc;
+}
+
+/* Efeito de drag and drop */
+.medical-drop-zone.drag-over {
+    background-color: #e3f2fd;
+    border-color: #3498db;
+}
+
+/* Barra de progresso */
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #ecf0f1;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    transition: width 0.3s ease;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+    
+    .main-content {
+        margin-left: 70px;
+        padding: 1rem;
+    }
+    
+    .medical-drop-zone {
+        padding: 1.5rem;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .confidence-indicator {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .confidence-bar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .upload-card-footer, 
+    .diagnosis-actions {
+        flex-direction: column;
+    }
+    
+    .btn-medical-primary,
+    .btn-medical-secondary {
+        width: 100%;
+    }
+}

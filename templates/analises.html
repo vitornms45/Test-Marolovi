@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/css/dashboard.css" />
+    <link rel="stylesheet" href="static/css/analises.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <title>Comparativo de Modelos</title>
+  </head>
+  <body>
+    <aside class="vertical-sidebar">
+      <div class="sidebar-header">
+        <button class="toggle-btn" id="sidebar-toggle">
+          <i class="bi bi-list"></i>
+        </button>
+        <div class="user-profile">
+          <div class="user-avatar">M</div>
+          <div class="user-info">
+            <div class="user-name">Marolovi Tech</div>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+
+      <div class="sidebar-menu">
+        <div class="menu-section">
+          <div class="section-title">Menu Principal</div>
+          <a
+            href="/dashboard"
+            class="menu-item active"
+            data-tooltip="Dashboard"
+          >
+            <i class="bi bi-speedometer2 item-icon"></i>
+            <span class="item-text">Dashboard</span>
+          </a>
+          <a href="/analises" class="menu-item" data-tooltip="Análises">
+            <i class="bi bi-graph-up item-icon"></i>
+            <span class="item-text">Análises</span>
+          </a>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-title">Ferramentas</div>
+          <a
+            href="/oftsys-cadastro-paciente"
+            class="menu-item"
+            data-tooltip="IA Diagnóstica"
+          >
+            <i class="bi bi-robot item-icon"></i>
+            <span class="item-text">IA Diagnóstica</span>
+          </a>
+          <a href="#" class="menu-item" data-tooltip="Relatórios">
+            <i class="bi bi-file-text item-icon"></i>
+            <span class="item-text">O Artigo</span>
+          </a>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-title">Configurações</div>
+          <a href="/" class="menu-item" data-tooltip="Sair">
+            <i class="bi bi-box-arrow-right item-icon"></i>
+            <span class="item-text">Sair</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="comparison-header">
+        <h1>Comparação de Modelos</h1>
+        <p>Desempenho dos algoritmos de diagnóstico por imagem</p>
+      </div>
+
+      <div style="overflow-x: auto">
+        <table class="model-table">
+          <thead>
+            <tr>
+              <th>Modelo</th>
+              <th>Acurácia</th>
+              <th>Precisão</th>
+              <th>Tempo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="model-name">YOLOv11</span>
+              </td>
+              <td class="best-metric">
+                <div class="metric">
+                  <span class="metric-value">-</span>
+                </div>
+              </td>
+              <td class="best-metric">
+                <div class="metric">
+                  <span class="metric-value">-</span>
+                </div>
+              </td>
+              <td>
+                <div class="metric">
+                  <span class="metric-value">-</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">Keras</span>
+              </td>
+              <td>
+                <div class="metric">
+                  <span class="metric-value">-</span>
+                </div>
+              </td>
+              <td>
+                <div class="metric">
+                  <span class="metric-value">-</span>
+                </div>
+              </td>
+              <td>
+                <div class="metric">
+                  <span class="metric-value">-</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+  <script src="static/src/sidebar.js"></script>
+</html>

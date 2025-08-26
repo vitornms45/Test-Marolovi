@@ -1,0 +1,67 @@
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  border: 0px;
+}
+
+label,
+legend {
+  font-weight: 600;
+  text-align: start;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: Inter, "Noto Sans", sans-serif;
+}
+
+.form-patient-registration input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.inline {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+input[type="date"] {
+  color: #666;
+}
+
+.gender {
+  font-weight: 400 !important;
+}
+
+input[type="radio"] {
+  accent-color: #3498db;
+}
+
+.form-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-bottom: 3rem;
+  border-top: 4px solid #3498db;
+}
+
+.form-area {
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 400 !important;
+  text-align: center;
+}

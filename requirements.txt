@@ -1,0 +1,10 @@
+flask
+gunicorn
+numpy
+pillow
+tensorflow
+torch
+torchvision
+ultralytics
+scikit-learn
+python-dotenv

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    {% extends "base.html" %}
+
+    {% block content %}
+<div class="container">
+
+    <!-- Seção Compre nosso SaaS -->
+    <section class="buy-saas-section">
+    <div class="buy-saas-container">
+        <h2 class="section-title">Compre nosso Sistema</h2>
+        <p class="buy-saas-subtitle">Transforme o diagnóstico ocular na sua clínica com a tecnologia da Marolovi Tech.</p>
+        
+        <ul class="buy-saas-benefits">
+        <li>✔️ Diagnósticos rápidos e precisos com IA avançada</li>
+        <li>✔️ Interface fácil e segura para envio de exames</li>
+        <li>✔️ Suporte dedicado e atualizações constantes</li>
+        </ul>
+        
+        <button class="btn-primary buy-saas-cta">Adquirir Agora</button>
+    </div>
+    </section>
+
+        <!-- Seção Sobre -->
+    <section class="about-modern">
+    <div class="about-container">
+        <div class="about-header">
+        <h2 class="section-title">Sobre a Marolovi Tech</h2>
+        <p class="section-subtitle">Tecnologia avançada para saúde ocular acessível</p>
+        </div>
+
+        <div class="about-content">
+        <div class="about-text">
+            <p>
+            Na Marolovi Tech, combinamos inteligência artificial de ponta com expertise médica para revolucionar o diagnóstico de doenças oculares. Nossa plataforma oferece precisão clínica em tempo recorde, democratizando o acesso a cuidados oftalmológicos de qualidade.
+            </p>
+            
+            <div class="about-stats">
+            <div class="stat-item">
+                <div class="stat-number">+95%</div>
+                <div class="stat-label">Precisão diagnóstica</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">+50k</div>
+                <div class="stat-label">Exames analisados</div>
+            </div>
+            </div>
+            <br><br>
+            <div class="cta-buttons">
+            <button class="btn-primary-2">
+            <span>Saiba mais</span>
+            </button>
+        </div>  
+        </div>
+        
+        <div class="about-image">
+            <div style="width: 60%;height:30px;background-color: #7fbfcd; float: right;"></div>
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Tecnologia de diagnóstico ocular">
+            <div style="width:80%;height:30px;background-color:#396082;"></div>
+        </div>
+        </div>
+    </section>
+    <div>
+        <div class="metrics-header">
+            <h2 class="section-title">Como funciona o nosso sistema</h2>
+            <span class="section-subtitle">Step by Step</span>
+            
+        </div>
+        <div class="containerMetodo">
+            <div class="quadrados">
+            <div class="quadrado">
+                <div class="quadrado-icon">1</div>
+                <h3 class="verde">Captar</h3>
+                <p class="branco">Envio seguro de imagens de topografia corneal e tomografia (Pentacam, Orbscan) via upload.</p>
+                <div class="quadrado-detalhe"></div>
+            </div>
+            <div class="quadrado">
+                <div class="quadrado-icon">2</div>
+                <h3 class="verde">Analisar</h3>
+                <p class="branco">Processamento por IA especializada em padrões de ceratocone.</p>
+                <div class="quadrado-detalhe"></div>
+            </div>
+            <div class="quadrado">
+                <div class="quadrado-icon">3</div>
+                <h3 class="verde">Diagnosticar</h3>
+                <p class="branco">Classificação automática de Sim ou Não.</p>
+                <div class="quadrado-detalhe"></div>
+            </div>
+            <div class="quadrado">
+                <div class="quadrado-icon">4</div>
+                <h3 class="verde">Apoiar</h3>
+                <p class="branco">Recomendações personalizadas: crosslinking, anéis intracorneais, transplante ou acompanhamento.</p>
+                <div class="quadrado-detalhe"></div>
+            </div>
+        </div>
+        </div>
+        <br><br>
+        
+        <div class="metrics-section">
+        <div class="metrics-header">
+            <h2 class="section-title">Nossos Números</h2>
+            <span class="section-subtitle">Sucesso Mensurável</span>
+            
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-item">
+            <div class="metric-value">95%</div>
+            <div class="metric-label">Precisão do modelo escolhido</div>
+            </div>
+            <div class="metric-item">
+            <div class="metric-value">+500</div>
+            <div class="metric-label">Imagens utilizadas no treinamento do modelo</div>
+            </div>
+            <div class="metric-item">
+            <div class="metric-value">-3%</div>
+            <div class="metric-label">Taxa de erro</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+    <!-- Seção CTA -->
+    <section class="cta-section">
+    <div class="cta-container">
+        <div class="cta-content">
+        <span class="section-subtitle" style="font-size: x-large;">Leve a tecnologia da Marolovi Tech para sua clínica ou hospital</span>
+        <br>
+        <a href="/dashboard" class="btn-primary-2">Ir para a Demonstração</a>
+        </div>
+    </div>
+    </section>
+    </div>
+</body>
+{% endblock %}
+</html>
