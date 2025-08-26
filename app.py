@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 IMG_SIZE = (224, 224)
 yolo_model = YOLO("Models/Modelo_Yolov11_Improve_Final.pt")
-#keras_model = load_model("Models/Modelo_Keras_Improved.h5")
+keras_model = load_model("Models/Modelo_Keras_Improved.h5")
 
 
 def preprocess_image_keras(img, target_size=IMG_SIZE):
@@ -101,10 +101,11 @@ def predict():
         img = Image.open(io.BytesIO(file.read()))
 
         # # ======== Predição Keras =========
-        # keras_input = preprocess_image_keras(img)
-        # keras_pred = keras_model.predict(keras_input, verbose=0)
-        # keras_confidence = float(np.max(keras_pred))
-        # keras_class = int(np.argmax(keras_pred))
+        keras_input = preprocess_image_keras(img)
+        keras_pred = keras_model.predict(keras_input, verbose=0)
+        keras_confidence = float(np.max(keras_pred))
+        keras_class = int(np.argmax(keras_pred))
+
 
         # ======== Predição YOLO =========
         img_resized = img.resize(IMG_SIZE)
@@ -119,10 +120,10 @@ def predict():
 
         # Resposta de sucesso (JSON)
         return jsonify({
-            # "keras": {
-            #     "predicted_class": keras_class,
-            #     "confidence": keras_confidence
-            # },
+            "keras": {
+                 "predicted_class": keras_class,
+                 "confidence": keras_confidence
+             },
             "yolo": {
                 "predicted_class": yolo_class,
                 "confidence": yolo_confidence
