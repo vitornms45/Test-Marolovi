@@ -2,7 +2,6 @@ flask
 gunicorn
 numpy
 pillow
-tensorflow
-ultralytics
 scikit-learn
 python-dotenv
+onnxruntime
