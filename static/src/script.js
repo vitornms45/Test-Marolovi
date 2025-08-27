@@ -21,41 +21,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ===================== Função de envio de imagem =====================
     async function sendImage(file) {
-        const formData = new FormData();
-        formData.append("file", file);
+    const formData = new FormData();
+    formData.append("file", file);
 
-        try {
-            const response = await fetch("/predict", { method: "POST", body: formData });
+    try {
+        const response = await fetch("/predict", { method: "POST", body: formData });
+        const data = await response.json(); // Sempre espere um JSON
 
-            const text = await response.text();
-
-            if (!response.ok) {
-                console.error("Erro do servidor:", text);
-                alert("Erro na predição: " + text);
-                return;
-            }
-
-            let data;
-            try {
-                data = JSON.parse(text);
-            } catch (err) {
-                console.error("Resposta não é JSON:", text);
-                alert("Erro ao interpretar resposta do servidor");
-                return;
-            }
-
-            // Atualiza a interface com resultados do Keras
-            confidenceEl.innerText = (data.keras.confidence * 100).toFixed(1) + "%";
-            errorRateEl.innerText = (100 - data.keras.confidence * 100).toFixed(1) + "%";
-
-            console.log("Predição Keras:", data.keras);
-            console.log("Predição YOLO:", data.yolo);
-
-        } catch (error) {
-            console.error("Erro ao enviar imagem:", error);
-            alert("Erro ao enviar imagem para o servidor");
+        if (response.ok && data.success) {
+            // Se a predição foi bem-sucedida, redireciona para a URL fornecida
+            window.location.href = data.redirect_url;
+        } else {
+            // Se houve um erro, exibe a mensagem
+            console.error("Erro do servidor:", data.error);
+            alert("Erro na predição: " + data.error);
         }
+
+    } catch (error) {
+        console.error("Erro ao enviar imagem:", error);
+        alert("Erro de comunicação ao enviar a imagem.");
     }
+}
 
     // ===================== Botão Analyze =====================
     analyzeBtn.addEventListener("click", () => {

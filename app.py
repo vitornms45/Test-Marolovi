@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import os
 import io
 import numpy as np
 from PIL import Image
-import onnxruntime as ort # Replaces tensorflow and ultralytics
+import onnxruntime as ort 
+import secrets
 
 # --- Llama Index / Chatbot imports (mantidos comentados) ---
 # from llama_index.llms.groq import Groq
@@ -15,6 +16,7 @@ import onnxruntime as ort # Replaces tensorflow and ultralytics
 # from dotenv import load_dotenv
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)
 
 # --- Configuração dos Modelos ONNX ---
 IMG_SIZE = (224, 224)
@@ -74,61 +76,74 @@ def chat():
 @app.route("/oftsys", methods=["GET", "POST"])
 def oftsys():
     if request.method == "POST":
+        # Armazena os dados do paciente na sessão
+        session['patient_data'] = {
+            'nome': request.form.get('nome'),
+            'nascimento': request.form.get('nascimento'),
+            'sexo': request.form.get('sexo'), # Ajustado para 'sexo'
+            'prontuario': request.form.get('prontuario')
+        }
+        # Renderiza a página de upload de imagem
         return render_template("oftsys.html")
-    return render_template("oftsys.html")
+    # Se for GET, redireciona para o início do fluxo
+    return redirect(url_for('cadastro_paciente'))
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    if "file" not in request.files:
-        return jsonify({"error": "Nenhuma imagem enviada"}), 400
+    if "file" not in request.files or 'patient_data' not in session:
+        return jsonify({"error": "Dados incompletos ou imagem não enviada."}), 400
 
     file = request.files["file"]
     
     try:
-        # Abre a imagem a partir dos bytes recebidos
         img_bytes = io.BytesIO(file.read())
         img = Image.open(img_bytes)
-        
-        # Pré-processa a imagem uma vez
         processed_img = preprocess_image(img)
 
-        # --- Predição com o modelo Keras via ONNX ---
+        # --- Predições (seu código atual) ---
         keras_input = get_keras_input(processed_img)
         keras_pred_onnx = keras_session.run(None, {keras_input_name: keras_input})[0]
-        
         keras_confidence = float(np.max(keras_pred_onnx))
         keras_class = int(np.argmax(keras_pred_onnx))
 
-        # --- Predição com o modelo YOLO via ONNX ---
         yolo_input = get_yolo_input(processed_img)
         yolo_pred_onnx = yolo_session.run(None, {yolo_input_name: yolo_input})[0]
-
-        # A saída do YOLO é um array de probabilidades, pegamos o máximo na dimensão das classes
         yolo_confidence = float(np.max(yolo_pred_onnx, axis=1)[0])
         yolo_class = int(np.argmax(yolo_pred_onnx, axis=1)[0])
 
-        # Retorna o resultado em formato JSON
+        # Armazena os resultados da IA na sessão
+        session['ia_results'] = {
+            "keras": {"predicted_class": keras_class, "confidence": keras_confidence},
+            "yolo": {"predicted_class": yolo_class, "confidence": yolo_confidence}
+        }
+        
+        # Retorna uma resposta JSON para o JavaScript indicando sucesso e para onde redirecionar
         return jsonify({
-            "keras": {
-                "predicted_class": keras_class,
-                "confidence": keras_confidence
-            },
-            "yolo": {
-                "predicted_class": yolo_class,
-                "confidence": yolo_confidence
-            }
+            "success": True,
+            "redirect_url": url_for('analises')
         })
 
     except Exception as e:
-        # Log do erro no console do servidor para depuração
         print(f"Ocorreu um erro durante a predição: {e}")
-        # Retorna uma mensagem de erro genérica para o cliente
         return jsonify({"error": "Falha ao processar a imagem no servidor."}), 500
 
 
 @app.route("/analises")
 def analises():
-    return render_template("analises.html")
+    # Pega os dados da sessão
+    patient_data = session.get('patient_data')
+    ia_results = session.get('ia_results')
+
+    # Limpa a sessão após usar os dados para não persistirem
+    session.pop('patient_data', None)
+    session.pop('ia_results', None)
+    
+    if not patient_data or not ia_results:
+        # Se não houver dados, redireciona para    
+        return redirect(url_for('cadastro_paciente'))
+
+    # Renderiza a página de análise passando todos os dados
+    return render_template("analises.html", patient=patient_data, results=ia_results)
 
 @app.route("/oftsys-cadastro-paciente")
 def cadastro_paciente():
@@ -151,4 +166,4 @@ if __name__ == '__main__':
     # Obtém a porta da variável de ambiente ou usa 5000 como padrão
     port = int(os.environ.get("PORT", 5000))
     # Executa a aplicação
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
