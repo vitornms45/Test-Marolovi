@@ -4,17 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relatório de Análise Diagnóstica</title>
-    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
-    <link rel="stylesheet" href="static/css/oftsys.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/analises.css') }}" />
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 </head>
 <body>
 <aside class="vertical-sidebar">
+        <!-- SEU MENU LATERAL (SIDEBAR) VEM AQUI -->
         <div class="sidebar-header">
-            <button class="toggle-btn" id="sidebar-toggle">
+            <button class="toggle-btn" id="sidebar-toggle" style="margin-left: 3px;" >
                 <i class="bi bi-list"></i>
             </button>
             <div class="user-profile">
@@ -25,20 +23,18 @@
             </div>
         </div>
         <br><br>
-        
         <div class="sidebar-menu">
             <div class="menu-section">
                 <div class="section-title">Menu Principal</div>
-                <a href="/dashboard" class="menu-item active" data-tooltip="Dashboard">
+                <a href="/dashboard" class="menu-item" data-tooltip="Dashboard">
                     <i class="bi bi-speedometer2 item-icon"></i>
                     <span class="item-text">Dashboard</span>
                 </a>
-                <a href="/analises" class="menu-item" data-tooltip="Análises">
+                <a href="/analises" class="menu-item active" data-tooltip="Análises">
                     <i class="bi bi-graph-up item-icon"></i>
                     <span class="item-text">Análises</span>
                 </a>
             </div>
-            
             <div class="menu-section">
                 <div class="section-title">Ferramentas</div>
                 <a href="/oftsys-cadastro-paciente" class="menu-item" data-tooltip="IA Diagnóstica">
@@ -50,7 +46,6 @@
                     <span class="item-text">O Artigo</span>
                 </a>
             </div>
-            
             <div class="menu-section">
                 <div class="section-title">Configurações</div>
                 <a href="/" class="menu-item" data-tooltip="Sair">
@@ -61,39 +56,33 @@
         </div>
     </aside>
 
+
     <main class="main-content">
         <div class="medical-header">
             <h1 class="display-4"><i class="bi bi-file-earmark-medical"></i> Relatório de Análise Diagnóstica</h1>
             <p class="lead">Resultados da avaliação por imagem assistida por IA</p>
         </div>
 
+        <!-- Card de Informações do Paciente (permanece o mesmo) -->
         <div class="report-card">
             <div class="card-header">
                 <h2><i class="bi bi-person-vcard"></i> Informações do Paciente</h2>
             </div>
             <div class="card-content info-grid">
-                <div>
-                    <label>Nome do Paciente</label>
-                    <span>{{ patient.nome }}</span>
-                </div>
-                <div>
-                    <label>Nº Prontuário</label>
-                    <span>{{ patient.prontuario }}</span>
-                </div>
-                <div>
-                    <label>Data de Nascimento</label>
-                    <span>{{ patient.nascimento }}</span>
-                </div>
-                <div>
-                    <label>Sexo</label>
-                    <span style="text-transform: capitalize;">{{ patient.sexo }}</span>
-                </div>
+                <div><label>Nome</label><span>{{ patient.nome }}</span></div>
+                <div><label>Nº Prontuário</label><span>{{ patient.prontuario }}</span></div>
+                <div><label>Nascimento</label><span>{{ patient.nascimento }}</span></div>
+                <div><label>Sexo</label><span style="text-transform: capitalize;">{{ patient.sexo }}</span></div>
             </div>
         </div>
 
-        <div class="report-card">
-            <div class="card-header">
-                <h2><i class="bi bi-robot"></i> Resultados da Análise por IA</h2>
+        <!-- Loop para criar um card de resultado para cada imagem -->
+        {% for result in results %}
+        <div class="report-card result-item-card">
+            <div class="card-header result-item-header">
+                <!-- Ícone de imagem e nome do ficheiro -->
+                <i class="bi bi-image result-icon"></i>
+                <h2>Análise do Exame: {{ result.filename }}</h2>
             </div>
             <div class="card-content">
                 <table class="results-table">
@@ -108,7 +97,7 @@
                         <tr>
                             <td><span class="model-name yolo">YOLOv11</span></td>
                             <td>
-                                {% if results.yolo.predicted_class == 1 %}
+                                {% if result.yolo.predicted_class == 1 %}
                                     <span class="diagnosis-tag normal"><i class="bi bi-check-circle-fill"></i> Normal</span>
                                 {% else %}
                                     <span class="diagnosis-tag suspect"><i class="bi bi-exclamation-triangle-fill"></i> Suspeita de Ceratocone</span>
@@ -117,16 +106,16 @@
                             <td>
                                 <div class="confidence-display">
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: {{ results.yolo.confidence * 100 }}%;"></div>
+                                        <div class="progress-fill" style="width: {{ result.yolo.confidence * 100 }}%;"></div>
                                     </div>
-                                    <span class="confidence-value">{{ "%.1f"|format(results.yolo.confidence * 100) }}%</span>
+                                    <span class="confidence-value">{{ "%.1f"|format(result.yolo.confidence * 100) }}%</span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><span class="model-name keras">Keras CNN</span></td>
                             <td>
-                                {% if results.keras.predicted_class == 0 %}
+                                {% if result.keras.predicted_class== 1 %}
                                     <span class="diagnosis-tag normal"><i class="bi bi-check-circle-fill"></i> Normal</span>
                                 {% else %}
                                     <span class="diagnosis-tag suspect"><i class="bi bi-exclamation-triangle-fill"></i> Suspeita de Ceratocone</span>
@@ -135,23 +124,24 @@
                             <td>
                                 <div class="confidence-display">
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: {{ results.keras.confidence * 100 }}%;"></div>
+                                        <div class="progress-fill" style="width: {{ result.keras.confidence * 100 }}%;"></div>
                                     </div>
-                                    <span class="confidence-value">{{ "%.1f"|format(results.keras.confidence * 100) }}%</span>
+                                    <span class="confidence-value">{{ "%.1f"|format(result.keras.confidence * 100) }}%</span>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="disclaimer">
-                    <i class="bi bi-info-circle-fill"></i>
-                    <strong>Atenção:</strong> Este é um resultado preliminar e não substitui a avaliação e o diagnóstico de um profissional médico qualificado.
-                </div>
             </div>
         </div>
+        {% endfor %}
+        
+        <div class="disclaimer">
+            <i class="bi bi-info-circle-fill"></i>
+            <strong>Atenção:</strong> Este é um resultado preliminar e não substitui a avaliação e o diagnóstico de um profissional médico qualificado.
+        </div>
     </main>
-    
-  <script src="static/src/sidebar.js"></script>
-  <script src="{{ url_for('static', filename='src/script.js') }}"></script>
 </body>
+  <script src="static/src/sidebar.js"></script>
+  <script src="static/src/chatbot.js"></script>
 </html>

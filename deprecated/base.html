@@ -1,0 +1,117 @@
+<!-- templates/base.html -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900">
+    <title>Marolovi Tech</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,">
+    <link rel="stylesheet" href="static\css\styles.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+<body>
+    <header>
+    <div class="logo" href="#">
+      <div class="logo-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_6_319)">
+            <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+          </g>
+          <defs>
+            <clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath>
+          </defs>
+        </svg>
+      </div>
+      <h2>OFTSYS</h2>
+    </div>
+
+    <nav>
+      <div class="nav-links">
+        <a href="produto">Produto</a>
+        <a href="como-funciona">Como funciona</a>
+        <a href="recursos">Recursos</a>
+      </div>
+      <button class="btn-primary">
+        <a href="/dashboard"><span>Testar agora</span></a>
+      </button>
+    </nav>
+
+    <div class="btn-menu-mobile" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <div class="menu-mobile" id="menuMobile">
+    <ul>
+      <li><a href="produto">Produto</a></li>
+      <li><a href="como-funciona">Como funciona</a></li>
+      <li><a href="recursos">Recursos</a></li>
+      <a href="/dashboard">
+        <li class="btn-contato-mobile">Começar agora</li>
+      </a>
+    </ul>
+  </div>
+
+  <main>
+    {% block content %}
+    <!-- Conteúdo da página vai aqui -->
+    {% endblock %}
+  </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+            <div class="footer-column">
+                <h3 class="footer-title">Marolovi Tech</h3>
+                <p class="footer-text">Soluções tecnológicas inovadoras para o setor de saúde.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-title">Contato</h3>
+                <a href="mailto:info@marolovitech.com" class="footer-link">info@marolovitech.com</a>
+                <a href="tel:+5511999999999" class="footer-link">+55 (11) 99999-9999</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-title">Nossas Redes Sociais</h3>
+                <div class="footer-icons">
+                <a href="https://www.linkedin.com/in/mt-silva/" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/lorrana-santos-silva/" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/victornunes-m/" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/robert-souza-91646022a/" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            </div>
+            
+            <div class="footer-bottom">
+            <p class="footer-copyright">© 2024 Marolovi Tech. Todos os direitos reservados.</p>
+            <div class="footer-legal">
+                <a href="#" class="footer-link">Política de Privacidade</a>
+                <a href="#" class="footer-link">Termos de Serviço</a>
+            </div>
+            </div>
+        </div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        duration: 800,
+        once: true,
+    });
+    const menuToggle = document.getElementById('menuToggle');
+    const menuMobile = document.getElementById('menuMobile');
+
+        menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        menuMobile.classList.toggle('active');
+        });
+    </script>
+    
+        <script src="static\src\script.js"></script>
+  </footer>
+</body>
+

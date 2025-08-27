@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/dashboard.css">
-    <link rel="stylesheet" href="static/css/oftsys.css">
+    <title>OftSys - Análise de Imagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/oftsys.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <title>oftsys</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <aside class="vertical-sidebar">
+        <!-- SEU MENU LATERAL (SIDEBAR) VEM AQUI -->
         <div class="sidebar-header">
-            <button class="toggle-btn" id="sidebar-toggle">
+            <button class="toggle-btn" id="sidebar-toggle" style="margin-left: 3px;">
                 <i class="bi bi-list"></i>
             </button>
             <div class="user-profile">
@@ -22,11 +24,10 @@
             </div>
         </div>
         <br><br>
-        
         <div class="sidebar-menu">
             <div class="menu-section">
                 <div class="section-title">Menu Principal</div>
-                <a href="/dashboard" class="menu-item active" data-tooltip="Dashboard">
+                <a href="/dashboard" class="menu-item" data-tooltip="Dashboard">
                     <i class="bi bi-speedometer2 item-icon"></i>
                     <span class="item-text">Dashboard</span>
                 </a>
@@ -35,10 +36,9 @@
                     <span class="item-text">Análises</span>
                 </a>
             </div>
-            
             <div class="menu-section">
                 <div class="section-title">Ferramentas</div>
-                <a href="/oftsys-cadastro-paciente" class="menu-item" data-tooltip="IA Diagnóstica">
+                <a href="/oftsys-cadastro-paciente" class="menu-item active" data-tooltip="IA Diagnóstica">
                     <i class="bi bi-robot item-icon"></i>
                     <span class="item-text">IA Diagnóstica</span>
                 </a>
@@ -47,7 +47,6 @@
                     <span class="item-text">O Artigo</span>
                 </a>
             </div>
-            
             <div class="menu-section">
                 <div class="section-title">Configurações</div>
                 <a href="/" class="menu-item" data-tooltip="Sair">
@@ -57,76 +56,43 @@
             </div>
         </div>
     </aside>
+
     <div class="main-content">
-    <div class="medical-header">
-        <h1 class="display-4"><i class="fas fa-microscope"></i> Análise Médica Avançada</h1>
-        <p class="lead">Sistema de diagnóstico por imagem assistido por IA</p>
-    </div>
+        <div class="medical-header">
+            <h1 class="display-4"><i class="fas fa-microscope"></i> Análise Médica Avançada</h1>
+            <p class="lead">Passo 2 de 2: Envio do Exame de Imagem</p>
+        </div>
 
-
-    <div class="upload-card">
-        <div class="upload-card-header">
-            <h2><i class="fas fa-cloud-upload-alt"></i> Carregar Exame de Imagem</h2>
-        </div>
-        
-        <div class="medical-drop-zone" id="dropZone">
-            <div class="drop-zone-content">
-                <i class="fas fa-x-ray"></i>
-                <h3>Arraste seu exame de imagem aqui</h3>
-                <p>Ou clique para selecionar do computador</p>
-                <input type="file" id="medicalFileInput" accept="image/dicom,image/*">
+        <div class="upload-card">
+            <div class="upload-card-header">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Carregar Exames de Imagem</h2>
             </div>
-            <div class="progress-bar" id="uploadProgress" style="display: none;">
-                <div class="progress-fill"></div>
-            </div>
-        </div>
-        
-        <div class="upload-card-footer">
-            <button id="analyzeBtn" class="btn-medical-primary">
-                <i class="fas fa-search-plus"></i> ANALISAR IMAGEM
-            </button>
-            <button id="medicalClearBtn" class="btn-medical-secondary">
-                <i class="fas fa-trash-alt"></i> LIMPAR
-            </button>
-        </div>
-    </div>
-
-    <div class="results-section">
-        <div class="results-header">
-            <h2><i class="fas fa-diagnoses"></i> Resultados da Análise</h2>
-            <div class="indicadoresExame">
-                <div class="confidence-indicator">
-                    <span>Confiança da Análise:</span>
-                    <div class="confidence-bar">
-                        <div class="confidence-level" id="confidenceLevel"></div>
-                    </div>
-                    <span id="confidenceValue">0%</span>
-                </div>
-                <div class="confidence-indicator">
-                    <span>Precisão da Análise:</span>
-                    <div class="confidence-bar">
-                        <div class="confidence-level" id="confidenceLevel"></div>
-                    </div>
-                    <span id="confidenceValue">0%</span>
-                </div>
-                <div class="confidence-indicator">
-                    <span>Taxa de erro:</span>
-                    <div class="confidence-bar">
-                        <div class="confidence-level" id="confidenceLevel"></div>
-                    </div>
-                    <span id="taxaDeErro">0%</span>
-                </div>
-            </div>
-        </div>
-        
-        
             
+            <div class="medical-drop-zone" id="dropZone">
+                <!-- O conteúdo original da drop-zone será escondido quando houver imagens -->
+                <div class="drop-zone-content" id="dropZonePrompt">
+                    <i class="fas fa-x-ray"></i>
+                    <h3>Arraste os exames de imagem aqui</h3>
+                    <p>Ou clique para selecionar do computador</p>
+                </div>
+                <!-- Container para as miniaturas das imagens -->
+                <div id="thumbnailContainer" class="thumbnail-container"></div>
+                <!-- Input de arquivo agora aceita múltiplos arquivos -->
+                <input type="file" id="medicalFileInput" accept="image/*" style="display: none;" multiple>
+            </div>
+            
+            <div class="upload-card-footer">
+                <button id="analyzeBtn" class="btn-medical-primary" disabled>
+                    <i class="fas fa-search-plus"></i> ANALISAR IMAGENS
+                </button>
+                <button id="clearBtn" class="btn-medical-secondary">
+                    <i class="fas fa-trash-alt"></i> LIMPAR
+                </button>
+            </div>
         </div>
     </div>
-</div>
     
-    
+    <script src="{{ url_for('static', filename='src/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='src/oftsys.js') }}"></script>
 </body>
-<script src="static/src/sidebar.js"></script>
-<script src="{{ url_for('static', filename='src/script.js') }}"></script>
 </html>

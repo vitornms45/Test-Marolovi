@@ -32,9 +32,8 @@
 
     <nav>
       <div class="nav-links">
-        <a href="produto">Produto</a>
-        <a href="como-funciona">Como funciona</a>
-        <a href="recursos">Recursos</a>
+        <a href="#pricing">Produto</a>
+        <a href="#como_funciona">Como funciona</a>
       </div>
 
       <a href="/dashboard" class="btn-primary">
@@ -51,9 +50,8 @@
 
   <div class="menu-mobile" id="menuMobile">
     <ul>
-      <li><a href="#">Produto</a></li>
-      <li><a href="#">Como funciona</a></li>
-      <li><a href="#">Recursos</a></li>
+      <li><a href="#pricing">Produto</a></li>
+      <li><a href="#como_funciona">Como funciona</a></li>
       <a href="/dashboard">
         <li class="btn-contato-mobile">Começar agora</li>
       </a>
@@ -79,9 +77,11 @@
                         <h1>Revolucionando o cuidado ocular com detecção precoce por IA</h1>
                         <h2>Nossa tecnologia de ponta utiliza redes neurais convolucionais para analisar imagens da córnea com precisão incomparável, permitindo a detecção precoce de doenças visuais e melhorando os resultados para os pacientes.</h2>
                     </div>
-                    <button class="btn-primary large">
-                        <span>Saiba mais</span>
-                    </button>
+                    <a href="#como_funciona">
+                      <button class="btn-primary large">
+                          <span>Saiba mais</span>
+                      </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -113,11 +113,7 @@
           </div>
         </div>
         <br><br>
-        <div class="cta-buttons">
-        <button class="btn-primary-2">
-          <span>Saiba mais</span>
-        </button>
-      </div>  
+ 
       </div>
       
       <div class="about-image">
@@ -128,7 +124,7 @@
     </div>
 </section>
 
-    <div class="metrics-header">
+    <div class="metrics-header" id="como_funciona">
         <h2 class="section-title">Como funciona o nosso sistema</h2>
         <span class="section-subtitle">Step by Step</span>
         
@@ -188,6 +184,57 @@
   </div>
 </section>
 <!-- Seção CTA -->
+
+<section id="pricing" class="pricing-section">
+            <div class="pricing-container">
+                <div class="metrics-header">
+                    <h2 class="section-title">Planos Flexíveis para a sua Clínica</h2>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-plan">Básico</h3>
+                            <p class="pricing-description">Para profissionais individuais e pequenas clínicas.</p>
+                            <div class="pricing-price">R$ 199<span>/mês</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 50 análises de exames/mês</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 1 usuário</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Suporte por e-mail</li>
+                        </ul>
+                        <a href="#" class="btn-primary-outline">Adquirir Agora</a>
+                    </div>
+                    <div class="pricing-card popular">
+                        <div class="pricing-badge">Mais Popular</div>
+                        <div class="pricing-header">
+                            <h3 class="pricing-plan">Profissional</h3>
+                            <p class="pricing-description">Ideal para clínicas de médio porte.</p>
+                            <div class="pricing-price">R$ 499<span>/mês</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 200 análises de exames/mês</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Até 5 usuários</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Suporte prioritário por chat</li>
+                        </ul>
+                        <a href="#" class="btn-primary"  style="min-width: -webkit-fill-available;min-width: -moz-available;">Escolher Plano</a>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-plan">Enterprise</h3>
+                            <p class="pricing-description">Para grandes hospitais e redes.</p>
+                            <div class="pricing-price">Contato<span></span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Análises ilimitadas</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Usuários ilimitados</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Suporte dedicado</li>
+                        </ul>
+                        <a href="#" class="btn-primary-outline">Falar com Vendas</a>
+                    </div>
+                </div>
+            </div>
+  </section>
+
 <section class="cta-section">
   <div class="cta-container">
     <div class="cta-content">
@@ -248,3 +295,4 @@
 </script>
 </body>
 <script src="static\src\script.js"></script>
+

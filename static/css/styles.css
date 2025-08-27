@@ -1046,3 +1046,104 @@ main {
     padding: 1rem;
   }
 }
+
+/* --- NOVA SEÇÃO DE PREÇOS --- */
+.pricing-section {
+    padding: 4rem 2rem;
+    background-color: #ffffff;
+}
+.pricing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: stretch;
+}
+.pricing-card {
+    background-color: #ffffff;
+    border: 1px solid #e7eef3;
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.pricing-card:hover, .pricing-card.popular {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+.pricing-card.popular {
+    border-color: #1c5b85;
+    position: relative;
+}
+.pricing-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1c5b85;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.pricing-header {
+    flex-grow: 0;
+}
+.pricing-plan {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0e161b;
+}
+.pricing-description {
+    color: #4e7a97;
+    margin: 0.5rem 0 1.5rem 0;
+}
+.pricing-price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #0e161b;
+}
+.pricing-price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #4e7a97;
+}
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    text-align: left;
+    flex-grow: 1;
+}
+.pricing-features li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0e161b;
+}
+.pricing-features i {
+    color: #1c5b85;
+}
+.btn-primary-outline {
+    border: 2px solid #1c5b85;
+    color: #1c5b85;
+    background-color: transparent;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.btn-primary-outline:hover {
+    background-color: #1c5b85;
+    color: white;
+}
+
+/* --- FIM DA SEÇÃO DE PREÇOS --- */
